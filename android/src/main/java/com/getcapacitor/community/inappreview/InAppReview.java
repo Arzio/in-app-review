@@ -14,8 +14,8 @@ import com.google.android.play.core.review.testing.FakeReviewManager;
 
 public class InAppReview {
 
-    public void requestReview(final PluginCall call, final AppCompatActivity activity) {
-        final ReviewManager manager = BuildConfig.DEBUG
+    public void requestReview(final PluginCall call, final AppCompatActivity activity, final boolean isDevMode) {
+        final ReviewManager manager = isDevMode
             ? new FakeReviewManager(activity)
             : ReviewManagerFactory.create(activity);
 

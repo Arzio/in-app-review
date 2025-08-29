@@ -16,7 +16,7 @@ public class InAppReviewPlugin extends Plugin {
     @PluginMethod
     public void requestReview(PluginCall call) {
         final AppCompatActivity activity = getActivity();
-        implementation.requestReview(call, activity);
+        implementation.requestReview(call, activity, this.getBridge().isDevMode());
 
         call.resolve();
     }
