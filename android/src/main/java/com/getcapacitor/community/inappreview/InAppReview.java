@@ -10,11 +10,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.review.testing.FakeReviewManager;
 
 public class InAppReview {
 
     public void requestReview(final PluginCall call, final AppCompatActivity activity) {
-        final ReviewManager manager = ReviewManagerFactory.create(activity);
+        final ReviewManager manager = BuildConfig.DEBUG
+            ? new FakeReviewManager(activity)
+            : ReviewManagerFactory.create(activity);
 
         Task<ReviewInfo> request = manager.requestReviewFlow();
         request.addOnFailureListener(
